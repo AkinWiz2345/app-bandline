@@ -1,0 +1,47 @@
+<div class='container px-4 py-4'>
+  <div class="row">
+    <div class="col-sm-8 offset-sm-2">
+    
+      <div class='text-center py-4'>
+        <div>
+          <!--イメージ画像-->
+        </div>
+      </div>
+    
+      <p class="border-bottom"><%= @article.heading %></p>
+        
+      <dl class="px-5">
+        <dt class="text-left font-weight-normal">募集性別</dt>
+        <dd class="pl-3 border">募集性別</dd>
+        <dt class="text-left font-weight-normal">募集年齢</dt>
+        <dd class="pl-3 border">募集年齢</dd>
+        <dt class="text-left font-weight-normal">活動エリア</dt>
+        <dd class="pl-3 border">活動エリア</dd>
+        <dt class="text-left font-weight-normal mt-3">募集パート</dt>
+        <dd class="pl-3 border">募集パート</dd>
+        <dt class="text-left font-weight-normal mt-3">自己紹介文</dt>
+        <dd class="text-left pl-3 border"><%= @article.introduction %></dd>
+      </dl>
+        
+      
+      <% if current_user == @article.user %>
+        <div class="text-center mt-4">
+          <%= link_to "記事を編集する", edit_article_path(@article), class: 'btn btn-big btn-secondary' %>
+          <%= link_to "記事を削除する", @article, method: :delete, data: { confirm: "You sure?" }, class: 'btn btn-big btn-info ml-4'%>
+        </div>
+      <% else %>
+        
+        <div class="media ml-5 mt-4">
+      	  <% if @article.user.image? %>
+            <%= image_tag @article.user.image.url, class: "rounded img-fluid w-10 media-left", width: '50px' %>
+          <% end %>
+      	<div class="media-body text-left ml-3">
+        	<h4 class="media-heading font-weight-normal"><%= @article.user.name %></h4>
+        	<%= link_to "プロフィールを見る", user_path(@article.user) %>
+      	</div>
+      <% end %>
+   
+      </div>
+    </div>
+  </div>
+</div>

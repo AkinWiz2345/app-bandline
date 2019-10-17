@@ -1,8 +1,10 @@
-<footer class="bg-info mt-4">
+<footer class="bg-dark mt-4 py-3">
   <div class="row">
     <div class="mx-auto text-white">
-      <%= link_to 'ログイン', login_path, class: 'border-right pl-1 pr-2 text-white'%>
-      <%= link_to '新規登録(無料)', signup_path, class: 'border-right pl-1 pr-2 text-white'%>
+      <% unless logged_in? %>
+        <%= link_to 'ログイン', login_path, class: 'border-right pl-1 pr-2 text-white'%>
+        <%= link_to '新規登録(無料)', signup_path, class: 'border-right pl-1 pr-2 text-white'%>
+      <% end %>
       <a class="pl-1 pr-2">利用規約</a>
     </div>
   </div>

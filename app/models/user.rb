@@ -8,7 +8,9 @@ class User < ApplicationRecord
   validates :introduction, length: { maximum: 500 } 
   has_secure_password
   
-  enum gender: {男性: 1, 女性: 2}
+  enum gender: {指定なし: 0, 男性: 1, 女性: 2}
   
   mount_uploader :image, ImageUploader
+  
+  has_many :articles
 end

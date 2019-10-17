@@ -1,24 +1,46 @@
 <div class='container px-4 py-4'>
-
   <div class="row">
-    <aside class="col-sm-4">
-      <div class="card">
-        <div class="card-header">
-          <h3 class="card-title"><%= @user.name %></h3>
-        </div>
-        <div class="card-body">
-          <% if @user.image? %>
-            <%= image_tag @user.image.url, class: "rounded img-fluid" %>
-          <% end %>
-        </div>
-      </div>
-    </aside>
-    <div class="col-sm-8">
-      <ul class="nav nav-tabs nav-justified mb-3">
-        <li class="nav-item"><a href="#" class="nav-link">投稿記事</a></li>
+    <div class="col-sm-6 offset-sm-3">
+    
+      <ul class="nav nav-tabs nav-justified my-3">
+        <li class="nav-item"><a href=# class="nav-link active">プロフィール</a></li>
         <li class="nav-item"><a href="#" class="nav-link">気になるリスト</a></li>
       </ul>
+  
+      <div class='text-center py-4'>
+        <div>
+          <% if @user.image? %>
+          <%= image_tag @user.image.url, class: "rounded img-fluid mx-auto", width: '200px' %>
+          <% end %>
+        </div>
+    
+        <h3 class="mt-3"><%= @user.name %></h3>
+        
+        <div class="lead mt-3">
+          <span class="mr-2"><%= @user.gender %></span>
+          <span><%= @user.birthday %></span>
+        </div>
+      </div>
+    
+        <dl class="px-5">
+          <dt class="text-left font-weight-normal">性別</dt>
+          <dd class="pl-3 border">性別</dd>
+          <dt class="text-left font-weight-normal">年齢</dt>
+          <dd class="pl-3 border">年齢</dd>
+          <dt class="text-left font-weight-normal">活動エリア</dt>
+          <dd class="pl-3 border"><%= @user.area %><%= '未記入です' if @user.area == nil %></dd>
+          <dt class="text-left font-weight-normal mt-3">担当パート</dt>
+          <dd class="pl-3 border"><%= @user.part %><%= '未記入です' if @user.part == nil %></dd>
+          <dt class="text-left font-weight-normal mt-3">自己紹介文</dt>
+          <dd class="text-left pl-3 border"><%= @user.introduction %><%= '未記入です' if @user.introduction == nil %></dd>
+        </dl>
+        
+        
+        <div class="text-center mt-4">
+          <%= link_to "バンドメンバー募集記事を作成する", new_article_path, class: 'btn btn-big btn-secondary' %>
+        </div>
+    
+   
     </div>
   </div>
-
 </div>
