@@ -4,21 +4,23 @@
     
       <div class='text-center py-4'>
         <div>
-          <!--イメージ画像-->
+          <% if @article.image? %>
+          <%= image_tag @article.image.url, class: "rounded img-fluid mx-auto", width: '200px' %>
+          <% end %>
         </div>
       </div>
     
-      <p class="border-bottom"><%= @article.heading %></p>
+      <p class="border-bottom text-center"><%= @article.heading %></p>
         
       <dl class="px-5">
-        <dt class="text-left font-weight-normal">募集性別</dt>
-        <dd class="pl-3 border">募集性別</dd>
-        <dt class="text-left font-weight-normal">募集年齢</dt>
-        <dd class="pl-3 border">募集年齢</dd>
+        <dt class="text-left font-weight-normal">性別</dt>
+        <dd class="pl-3 border"><%= @article.gender %></dd>
+        <dt class="text-left font-weight-normal">年齢</dt>
+        <dd class="pl-3 border"><%= @article.age %>歳</dd></dd>
         <dt class="text-left font-weight-normal">活動エリア</dt>
-        <dd class="pl-3 border">活動エリア</dd>
-        <dt class="text-left font-weight-normal mt-3">募集パート</dt>
-        <dd class="pl-3 border">募集パート</dd>
+        <dd class="pl-3 border"><%= @article.area %></dd>
+        <dt class="text-left font-weight-normal mt-3">担当パート</dt>
+        <dd class="pl-3 border">担当パート</dd>
         <dt class="text-left font-weight-normal mt-3">自己紹介文</dt>
         <dd class="text-left pl-3 border"><%= @article.introduction %></dd>
       </dl>

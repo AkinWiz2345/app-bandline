@@ -4,13 +4,18 @@ class User < ApplicationRecord
                     format: { with: /\A[\w+\-.]+@[a-z\d\-.]+\.[a-z]+\z/i },
                     uniqueness: { case_sensitive: false }
   validates :gender, presence: true
-  # validates :birth, presence: true
+  validates :birthday, presence: true
   validates :introduction, length: { maximum: 500 } 
-  has_secure_password
   
-  enum gender: {指定なし: 0, 男性: 1, 女性: 2}
+  has_secure_password
   
   mount_uploader :image, ImageUploader
   
-  has_many :articles
+  has_many :articles, dependent: :destroy
+  
+  def age
+    d1 = self.birthday.strftime("%Y%m%d").to_i
+    d2 = Date.today.strftime("%Y%m%d").to_i
+    return (d2 - d1) / 10000
+  end
 end

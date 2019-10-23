@@ -14,32 +14,79 @@
           <% end %>
         </div>
     
-        <h3 class="mt-3"><%= @user.name %></h3>
+        <h3 class="mt-3">
+          <%= @user.name %>
+          <% if current_user == @user %>
+            <%= link_to '編集', edit_user_path(@user), class: 'btn btn-sm btn-secondary ml-2' %>
+          <% end %>
+        </h3>
         
         <div class="lead mt-3">
           <span class="mr-2"><%= @user.gender %></span>
-          <span><%= @user.birthday %></span>
+          <span><%= @user.age %>歳</span>
         </div>
       </div>
     
         <dl class="px-5">
-          <dt class="text-left font-weight-normal">性別</dt>
-          <dd class="pl-3 border">性別</dd>
-          <dt class="text-left font-weight-normal">年齢</dt>
-          <dd class="pl-3 border">年齢</dd>
           <dt class="text-left font-weight-normal">活動エリア</dt>
           <dd class="pl-3 border"><%= @user.area %><%= '未記入です' if @user.area == nil %></dd>
           <dt class="text-left font-weight-normal mt-3">担当パート</dt>
-          <dd class="pl-3 border"><%= @user.part %><%= '未記入です' if @user.part == nil %></dd>
+          <dd class="pl-3 border">担当パート(仮)</dd>
           <dt class="text-left font-weight-normal mt-3">自己紹介文</dt>
           <dd class="text-left pl-3 border"><%= @user.introduction %><%= '未記入です' if @user.introduction == nil %></dd>
         </dl>
         
+        <% if @band_article %>
+          <div>バンドメンバー募集記事</div>
+          <div class="media mb-3 border">
+            <% if @band_article.image? %>
+              <%= image_tag @band_article.image.url, class: "rounded img-fluid w-10", width: '50px' %>
+            <% end %>
+            <div class="media-body">
+              <div class="d-flex">
+                <p><%= link_to @band_article.heading, @band_article, class: 'text-dark' %></p>
+                <% if current_user == @user %>
+                  <div>
+                    <%= link_to "編集", edit_article_path(@band_article), class: 'btn btn-sm btn-secondary' %>
+                  </div>
+                <% end %>
+              </div>
+            </div>
+          </div>
+        <% elsif current_user == @user  %>
+          <div class="text-center mt-4">
+            <%= link_to "バンドメンバー募集記事を作成する", band_new_articles_path, class: 'btn btn-big btn-secondary' %>
+          </div>
+        <% else %>
+          <div>バンドメンバー募集記事</div>
+          <p class="text-center border">バンドメンバー募集記事はありません</p>
+        <% end %>
+        <% if @member_article %>
+          <div>メンバー加入希望記事</div>
+          <div class="media mb-3 border">
+            <% if @member_article.image? %>
+              <%= image_tag @member_article.image.url, class: "rounded img-fluid w-10", width: '50px' %>
+            <% end %>
+            <div class="media-body">
+              <div class="d-flex">
+                <p><%= link_to @member_article.heading, @member_article, class: 'text-dark' %></p>
+                <% if current_user == @user %>
+                  <div>
+                    <%= link_to "編集", edit_article_path(@member_article), class: 'btn btn-sm btn-secondary' %>
+                  </div>
+                <% end %>
+              </div>
+            </div>
+          </div>
+        <% elsif current_user == @user %>
+          <div class="text-center mt-4">
+            <%= link_to "メンバー加入希望記事を作成する", member_new_articles_path, class: 'btn btn-big btn-secondary' %>
+          </div>
+        <% else %>
+          <div>メンバー加入希望記事</div>
+          <p class="text-center border">メンバー加入希望記事はありません</p>
+        <% end %>
         
-        <div class="text-center mt-4">
-          <%= link_to "バンドメンバー募集記事を作成する", new_article_path, class: 'btn btn-big btn-secondary' %>
-        </div>
-    
    
     </div>
   </div>

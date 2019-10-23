@@ -8,10 +8,16 @@ Rails.application.routes.draw do
   get 'signup', to: 'users#new'
   resources :users do
     member do
-      get :profile
       get :likes
     end
   end
   
-  resources :articles
+  resources :articles, only: [:index,:destroy, :show, :edit, :update] do
+    collection do
+      get :band_new
+      post :band_create
+      get :member_new
+      post :member_create
+    end
+  end
 end

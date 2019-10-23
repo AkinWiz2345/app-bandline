@@ -1,0 +1,48 @@
+<div class="container mt-4">
+  
+  <div class="text-center">
+    <h1>メンバー加入希望記事の作成</h1>
+  </div>
+  
+  <div class="row">
+  <div class="col-sm-6 offset-sm-3">
+
+    <%= form_with(model: @article, url: member_create_articles_path, local: true) do |f| %>
+    
+      <%= render 'layouts/error_messages', model: f.object %> 
+        
+        <div class='text-center py-4'>
+          <div>
+            <% if current_user.image? %>
+            <%= image_tag current_user.image.url, class: "rounded img-fluid mx-auto", width: '200px' %>
+            <% end %>
+          </div>
+        </div>
+      
+        <div class="form-group">
+          <%= f.label :heading, '記事の見出し', class: 'lead font-weight-bold' %>
+          <%= f.text_field :heading, class: 'form-control' %>
+        </div>
+          
+        <dl class="px-5">
+          <dt class="text-left font-weight-normal">性別</dt>
+          <dd class="pl-3 border"><%= current_user.gender %></dd>
+          <dt class="text-left font-weight-normal">年齢</dt>
+          <dd class="pl-3 border"><%= current_user.age %>歳</dd></dd>
+          <dt class="text-left font-weight-normal">活動エリア</dt>
+          <dd class="pl-3 border"><%= current_user.area%></dd>
+          <dt class="text-left font-weight-normal mt-3">担当パート</dt>
+          <dd class="pl-3 border">担当パート</dd>
+          <dt class="text-left font-weight-normal mt-3">記事内容</dt>
+          <dd class="pl-3 border"><%= current_user.introduction %></dd>
+        </dl>
+        
+
+      
+        <%= f.submit '記事を投稿', class: 'btn btn-primary btn-block' %>
+      <% end %>
+    </div>
+  </div>
+
+  
+</div>

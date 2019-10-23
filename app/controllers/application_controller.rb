@@ -1,6 +1,7 @@
 class ApplicationController < ActionController::Base
   
   include SessionsHelper
+  include UsersHelper
   
   private
 
@@ -9,4 +10,5 @@ class ApplicationController < ActionController::Base
       redirect_to login_url
     end
   end
+
 end
