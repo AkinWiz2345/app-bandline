@@ -31,7 +31,7 @@ class UsersController < ApplicationController
     @user = User.find(params[:id])
     @band_article = @user.articles.find_by(kind: 'band')
     @member_article = @user.articles.find_by(kind: 'member')
-    
+    @parts = @user.parts.all.map { |h| h[:name] }
   end
   
   def update
@@ -53,6 +53,6 @@ class UsersController < ApplicationController
   private
   
   def user_params
-    params.require(:user).permit(:name, :email, :password, :password_confirmation, :gender, :birthday, :area, :image, :introduction, :part)
+    params.require(:user).permit(:name, :email, :password, :password_confirmation, :gender, :birthday, :area, :image, :introduction, part_ids: [])
   end
 end

@@ -11,9 +11,13 @@
           <%= image_tag @article.image.url, class: "rounded img-fluid mx-auto", width: '200px' %>
           <% end %>
         </div>
+        <% unless current_user == @article.user%>
+          <%= render 'favorites/likes_button', article: @article %>
+        <% end %>
       </div>
     
       <p class="border-bottom text-center"><%= @article.heading %></p>
+      
         
       <dl class="px-5">
         <dt class="text-left font-weight-normal">性別</dt>
@@ -46,6 +50,7 @@
       <% end %>
    
       </div>
+      
     </div>
   </div>
 </div>
