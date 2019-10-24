@@ -20,14 +20,31 @@
       
         
       <dl class="px-5">
-        <dt class="text-left font-weight-normal">性別</dt>
-        <dd class="pl-3 border"><%= @article.gender %></dd>
-        <dt class="text-left font-weight-normal">年齢</dt>
-        <dd class="pl-3 border"><%= @article.age %>歳</dd></dd>
-        <dt class="text-left font-weight-normal">活動エリア</dt>
-        <dd class="pl-3 border"><%= @article.area %></dd>
-        <dt class="text-left font-weight-normal mt-3">担当パート</dt>
-        <dd class="pl-3 border">担当パート</dd>
+        <% case @article.kind %>
+        <% when 'band' %>
+          <dt class="text-left font-weight-normal">募集性別</dt>
+          <dd class="pl-3 border"><%= @article.gender %></dd>
+          <dt class="text-left font-weight-normal">募集年齢</dt>
+          <dd class="pl-3 border"><%= @article.minimum_age%>〜<%= @article.maximum_age %></dd>
+          <dt class="text-left font-weight-normal">活動エリア</dt>
+          <dd class="pl-3 border"><%= @article.area %></dd>
+          <dt class="text-left font-weight-normal mt-3">募集パート</dt>
+        <% when 'member' %>
+          <dt class="text-left font-weight-normal">性別</dt>
+          <dd class="pl-3 border"><%= @article.gender %></dd>
+          <dt class="text-left font-weight-normal">年齢</dt>
+          <dd class="pl-3 border"><%= @article.age %>歳</dd>
+          <dt class="text-left font-weight-normal">活動エリア</dt>
+          <dd class="pl-3 border"><%= @article.area %></dd>
+          <dt class="text-left font-weight-normal mt-3">担当パート</dt>
+        <% end %>
+        <dd class="pl-3 border">
+          <% unless @parts.empty? %>
+            <%= @parts.join('、') %>
+          <% else %>
+            指定なし
+          <% end %>
+        </dd>
         <dt class="text-left font-weight-normal mt-3">自己紹介文</dt>
         <dd class="text-left pl-3 border"><%= @article.introduction %></dd>
       </dl>

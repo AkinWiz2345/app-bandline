@@ -45,6 +45,13 @@
           :selected => '指定なし', class: 'form-control' %>
       </div>
       
+      <div class="form-group border-bottom">
+        <%= f.label :parts_ids, '募集パート' %><br/>
+        <%= f.collection_check_boxes(:part_ids, Part.all, :id, :name) do |part| %>
+        <%= part.label{ part.check_box + part.text }%>
+        <% end %>
+      </div>
+      
       <div class="form-group">
         <%= f.label :introduction, '自己紹介文' %>
         <%= f.text_area :introduction, class: 'form-control' %>

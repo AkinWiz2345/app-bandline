@@ -29,6 +29,7 @@ class ArticlesController < ApplicationController
     @article.area = current_user.area
     @article.introduction = current_user.introduction
     @article.image = current_user.image
+
     if @article.save
       flash[:success] = '記事を投稿しました。'
       redirect_to @article
@@ -45,6 +46,7 @@ class ArticlesController < ApplicationController
   
   def member_new
     @article = Article.new
+    @parts = current_user.parts.all.map { |h| h[:name] }
   end
   
   def edit
@@ -53,6 +55,7 @@ class ArticlesController < ApplicationController
   
   def show
     @article = Article.find_by(id: params[:id])
+     @parts = @article.parts.all.map { |h| h[:name] }
   end
   
   def update
@@ -67,14 +70,14 @@ class ArticlesController < ApplicationController
 
   def destroy
     @article.destroy
-    flash[:success] = 'メッセージを削除しました。'
+    flash[:success] = '記事を削除しました。'
     redirect_to current_user
   end
   
   private
 
   def article_params
-    params.require(:article).permit(:heading, :introduction, :gender, :minimum_age, :maximum_age, :age, :area, :image)
+    params.require(:article).permit(:heading, :introduction, :gender, :minimum_age, :maximum_age, :age, :area, :image, part_ids: [])
   end
   
   def correct_user

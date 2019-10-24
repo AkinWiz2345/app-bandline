@@ -10,7 +10,16 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2019_10_24_143930) do
+ActiveRecord::Schema.define(version: 2019_10_24_173522) do
+
+  create_table "article_parts", options: "ENGINE=InnoDB DEFAULT CHARSET=utf8", force: :cascade do |t|
+    t.bigint "article_id"
+    t.bigint "part_id"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["article_id"], name: "index_article_parts_on_article_id"
+    t.index ["part_id"], name: "index_article_parts_on_part_id"
+  end
 
   create_table "articles", options: "ENGINE=InnoDB DEFAULT CHARSET=utf8", force: :cascade do |t|
     t.bigint "user_id"
@@ -66,6 +75,8 @@ ActiveRecord::Schema.define(version: 2019_10_24_143930) do
     t.string "part"
   end
 
+  add_foreign_key "article_parts", "articles"
+  add_foreign_key "article_parts", "parts"
   add_foreign_key "articles", "users"
   add_foreign_key "favorites", "articles"
   add_foreign_key "favorites", "users"

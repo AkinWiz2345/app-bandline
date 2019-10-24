@@ -14,6 +14,10 @@ Rails.application.routes.draw do
   end
   
   resources :articles, only: [:index, :destroy, :show, :edit, :update] do
+    member do
+      get :band
+      get :member
+    end
     collection do
       get :band_new
       post :band_create
