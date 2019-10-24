@@ -12,10 +12,28 @@ class User < ApplicationRecord
   mount_uploader :image, ImageUploader
   
   has_many :articles, dependent: :destroy
+  has_many :favorites, dependent: :destroy
+  has_many :likes, through: :favorites, source: :article
   
   def age
     d1 = self.birthday.strftime("%Y%m%d").to_i
     d2 = Date.today.strftime("%Y%m%d").to_i
     return (d2 - d1) / 10000
   end
+  
+  def like(article)
+    unless self.articles.include?(article)
+     self.favorites.find_or_create_by(article_id: article.id)
+    end
+  end
+  
+  def remove_like(article)
+    favorite = self.favorites.find_by(article_id: article.id)
+    favorite.destroy if favorite
+  end
+  
+  def like?(article)
+    self.likes.include?(article)
+  end
+  
 end

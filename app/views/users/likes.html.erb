@@ -1,0 +1,16 @@
+<div class="container px-4 py-4">
+  <div class="row">
+    <div class="col-sm-6 offset-sm-3">
+    
+      <ul class="nav nav-tabs nav-justified my-3">
+        <li class="nav-item"><a href="<%= user_path(@user) %>" class="nav-link <%= 'active' if current_page?(user_path(@user)) %>">プロフィール</a></li>
+        <li class="nav-item"><a href="<%= likes_user_path(@user) %>" class="nav-link <%= 'active' if current_page?(likes_user_path(@user)) %>">気になるリスト</a></li>
+      </ul>
+   
+    </div>
+  </div>
+  
+  <div class="mt-4">
+    <%=render 'articles/articles', articles: @likes %>
+  </div>
+</div>
