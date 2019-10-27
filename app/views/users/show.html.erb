@@ -96,6 +96,18 @@
         <p class="text-center border">メンバー加入希望記事はありません</p>
       <% end %>
         
+      <% unless current_user == @user %>  
+        <% if @room %>
+          <%= link_to 'メッセージを送る', @room %>
+        <% else %>
+          <%= form_with(model: Room.new, local: true) do |f| %>
+            <%= fields_for current_user.entries.build do |e| %>
+              <%= e.hidden_field :user_id, value: @user.id %>
+            <% end %>
+            <%= f.submit "チャットを始める" %>
+          <% end %>
+        <% end %>
+      <% end %>
    
     </div>
   </div>

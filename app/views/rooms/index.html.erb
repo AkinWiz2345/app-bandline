@@ -1,0 +1,8 @@
+<% @another_user_entries.each do |e| %>
+  <%= link_to room_path(e.room.id) do %>
+    <%= e.user.name %>とのメッセージ<br/>
+  <% end %>
+  <% unless e.room.message_ids.empty? %>
+    <%= Message.find_by(id: e.room.message_ids.last).content %><br/>
+  <% end %>
+<% end %>

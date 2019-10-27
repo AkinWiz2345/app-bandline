@@ -16,6 +16,9 @@ class User < ApplicationRecord
   has_many :likes, through: :favorites, source: :article, dependent: :destroy
   has_many :user_parts, dependent: :destroy
   has_many :parts, through: :user_parts, dependent: :destroy
+  has_many :entries, dependent: :destroy
+  has_many :rooms, through: :entries, dependent: :destroy
+  has_many :messages, dependent: :destroy
   
   def age
     d1 = self.birthday.strftime("%Y%m%d").to_i

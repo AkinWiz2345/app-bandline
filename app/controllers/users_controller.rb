@@ -1,6 +1,6 @@
 class UsersController < ApplicationController
-  before_action :require_user_logged_in, only: [:index, :show]
-  before_action :logged_in?, only: [:create, :new, :edit, :update]
+  before_action :require_user_logged_in
+  before_action :correct_user, only: [:edit, :update, :destroy]
   
   def index
     @users = User.order(id: :desc).page(params[:page]).per(25)
@@ -28,10 +28,21 @@ class UsersController < ApplicationController
 
   
   def show
-    @user = User.find(params[:id])
+    @user = User.find_by(id: params[:id])
     @band_article = @user.articles.find_by(kind: 'band')
     @member_article = @user.articles.find_by(kind: 'member')
-    @parts = @user.parts.all.map { |h| h[:name] }
+    @parts = @user.parts.all.order(:id).map { |h| h[:name] }
+    current_user_entries = Entry.where(user_id: current_user.id)
+    user_entries = Entry.where(user_id: @user.id)
+    unless @user.id == current_user.id
+      current_user_entries.each do |cu|
+        user_entries.each do |u|
+          if cu.room_id == u.room_id
+            @room =  Room.find_by(id: cu.room_id)
+          end
+        end
+      end
+    end
   end
   
   def update
@@ -51,6 +62,14 @@ class UsersController < ApplicationController
   end
   
   private
+  
+  def correct_user
+    @user = User.find_by(id: params[:id])
+    unless current_user == @user
+      flash[:danger] = '権限がありません'
+      redirect_back(fallback_location: root_path)
+    end
+  end
   
   def user_params
     params.require(:user).permit(:name, :email, :password, :password_confirmation, :gender, :birthday, :area, :image, :introduction, part_ids: [])

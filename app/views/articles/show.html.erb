@@ -12,7 +12,7 @@
           <% end %>
         </div>
         <% unless current_user == @article.user%>
-          <%= render 'favorites/likes_button', article: @article %>
+          <%= render 'favorites/like_button', article: @article %>
         <% end %>
       </div>
     

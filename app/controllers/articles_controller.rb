@@ -29,7 +29,6 @@ class ArticlesController < ApplicationController
     @article.area = current_user.area
     @article.introduction = current_user.introduction
     @article.image = current_user.image
-
     if @article.save
       flash[:success] = '記事を投稿しました。'
       redirect_to @article
@@ -50,12 +49,11 @@ class ArticlesController < ApplicationController
   end
   
   def edit
-    @article = Article.find_by(id: params[:id])
   end
   
   def show
     @article = Article.find_by(id: params[:id])
-     @parts = @article.parts.all.map { |h| h[:name] }
+    @parts = @article.parts.all.order(:id).map { |h| h[:name] }
   end
   
   def update
