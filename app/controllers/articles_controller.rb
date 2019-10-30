@@ -1,11 +1,19 @@
 class ArticlesController < ApplicationController
-  before_action :require_user_logged_in
+  before_action :require_user_logged_in, only: [:show]
   before_action :correct_user, only: [:edit, :update, :destroy]
   before_action :check_number_of_band, only: [:band_create, :band_new]
   before_action :check_number_of_member, only: [:member_create, :member_new]
   
   def index
     @articles = Article.order(id: :desc).page(params[:page]).per(25)
+  end
+  
+  def band
+    @articles = Article.where(kind: 'band').order(id: :desc).page(params[:page]).per(25)
+  end
+  
+  def member
+    @articles = Article.where(kind: 'member').order(id: :desc).page(params[:page]).per(25)
   end
   
   def band_create
@@ -29,6 +37,7 @@ class ArticlesController < ApplicationController
     @article.area = current_user.area
     @article.introduction = current_user.introduction
     @article.image = current_user.image
+    @article.parts = current_user.parts
     if @article.save
       flash[:success] = '記事を投稿しました。'
       redirect_to @article
@@ -45,7 +54,7 @@ class ArticlesController < ApplicationController
   
   def member_new
     @article = Article.new
-    @parts = current_user.parts.all.map { |h| h[:name] }
+    @parts_of_member = current_user.parts.all.map { |h| h[:name] }
   end
   
   def edit
@@ -53,7 +62,8 @@ class ArticlesController < ApplicationController
   
   def show
     @article = Article.find_by(id: params[:id])
-    @parts = @article.parts.all.order(:id).map { |h| h[:name] }
+    @parts_of_band = @article.parts.all.order(:id).map { |h| h[:name] }
+    @parts_of_member = @article.user.parts.all.order(:id).map { |h| h[:name] }
   end
   
   def update
@@ -99,5 +109,4 @@ class ArticlesController < ApplicationController
       redirect_back(fallback_location: root_path)
     end
   end
-    
 end

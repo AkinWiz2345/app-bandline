@@ -1,22 +1,27 @@
-<div class="jumbotron mb-0 mt-0">
-  <div class="text-center">
-    <%= link_to '新規登録(無料)', signup_path, class: 'btn btn-big btn-secondary' %>
-  </div>
-</div>
-<div class="container">
-  <div class="text-center">
-    <h2>新着記事</h2>
-    <div class="border bg-light py-3 px-5">
-      <%= render 'articles/articles', articles: @articles %>
-    </div>
-    
-    <div class="row mx-auto mt-4">
-      <div class="col">
-        <a href=# class="btn btn-secondary btn-big">募集中のバンドを探す</a>
-      </div>
-      <div class="col">
-        <a href=# class="btn btn-info btn-big">加入希望のメンバーを探す</a>
-      </div>
+<% unless logged_in? %>
+  <div class="center jumbotron">
+    <div class="text-center">
+      <h1>Welcome To BANDLINE</h1>
+      <%= link_to '新規登録(無料)', signup_path, class: 'btn btn-lg btn-primary mt-3' %>
     </div>
   </div>
+<% end %>
+
+<div class="mx-auto">
+  <h2 class="text-center mb-4">新着記事</h2>
+  <%= render 'articles/articles', articles: @articles %>
 </div>
+<div class="text-center">
+  <%= link_to '記事をもっと見る', articles_path, class: 'btn btn-outline-info btn-lg' %>
+</div>
+  
+  
+<div class="d-flex justify-content-around my-5">
+  <div>
+    <%= link_to 'メンバー募集の記事を探す', band_articles_path, class: 'btn btn-outline-dark btn-lg'%>
+  </div>
+  <div>
+    <%= link_to 'メンバー加入希望の記事を探す', member_articles_path, class: 'btn btn-outline-secondary btn-lg'%>
+  </div>
+</div>
+

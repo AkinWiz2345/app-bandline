@@ -1,0 +1,28 @@
+<tr class="info">
+  <td class="align-middle">
+    <% if article.image? %>
+      <%= image_tag article.image.url, class: "rounded img-fluid w-10", width: '70px' %>
+    <% else %>
+      未設定
+    <% end %>
+  </td>
+  <td class="align-middle">
+    <% case article.kind %>
+    <% when 'band' %>
+      <%= link_to 'メンバー募集', band_articles_path, class: "btn btn-dark btn-sm rounded-pill" %>
+    <% when 'member' %>
+      <%= link_to '加入希望', member_articles_path, class: "btn btn-secondary btn-sm rounded-pill" %>
+    <% end %>
+  </td>
+  <td class="align-middle"><%= link_to article.heading, article, class: 'text-dark'%></td>
+  <td class="align-middle"><%= link_to article.user.name, article.user %></td>
+  <td class="align-middle text-muted"><%= article.created_at %></td>
+  <% if logged_in? && article.user.id == current_user.id %>
+    <td class="align-middle">
+      <%= link_to '編集', edit_article_path(article), class: 'btn btn-success btn-sm rounded-pill'%>
+      <%= link_to '削除', article, method: :delete, data: { confirm: '削除してよろしいですか?' }, class: 'btn btn-danger btn-sm rounded-pill ml-2' %>
+    </td>
+  <% elsif logged_in? %>
+    <td class="align-middle"><%= render 'favorites/like_button', article: article %></td>
+  <% end %>
+</tr>

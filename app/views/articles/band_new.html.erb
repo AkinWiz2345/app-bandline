@@ -1,10 +1,8 @@
-<div class="container mt-4">
+<div class="text-center my-4">
+  <h1>バンドメンバー募集記事の作成</h1>
+</div>
   
-  <div class="text-center">
-    <h1>バンドメンバー募集記事の作成</h1>
-  </div>
-  
-  <div class="row">
+<div class="row">
   <div class="col-sm-6 offset-sm-3">
 
     <%= form_with(model: @article, url: band_create_articles_path, local: true) do |f| %>
@@ -12,12 +10,12 @@
       <%= render 'layouts/error_messages', model: f.object %>
       
       <div class="form-group">
-        <%= f.label :image, 'イメージ画像' %>
+        <%= f.label :image, 'イメージ画像' %><span class="text-warning pl-2">(任意)</span>
         <%= f.file_field :image, class: 'form-control' %>
       </div>
       
       <div class="form-group">
-        <%= f.label :heading, '記事の見出し' %>
+        <%= f.label :heading, '記事の見出し' %><span class="text-danger pl-2">※必須</span>
         <%= f.text_field :heading, class: 'form-control' %>
       </div>
       
@@ -40,27 +38,22 @@
       
       <div class="form-group border-bottom">
         <%= f.label :area, '活動エリア' %>
-        <%= f.select :area,
-          %w(指定なし 北海道 青森 岩手 宮城 秋田 山形 福島 茨城 栃木 群馬 埼玉 千葉 東京 神奈川 新潟 富山 石川 福井 山梨 長野 岐阜 静岡 愛知 三重 滋賀 京都 大阪 兵庫 奈良 和歌山 鳥取 島根 岡山 広島 山口 徳島 香川 愛媛 高知 福岡 佐賀 長崎 熊本 大分 宮崎 鹿児島 沖縄),
-          :selected => '指定なし', class: 'form-control' %>
+        <%= f.select :area, %w(指定なし 北海道 青森 岩手 宮城 秋田 山形 福島 茨城 栃木 群馬 埼玉 千葉 東京 神奈川 新潟 富山 石川 福井 山梨 長野 岐阜 静岡 愛知 三重 滋賀 京都 大阪 兵庫 奈良 和歌山 鳥取 島根 岡山 広島 山口 徳島 香川 愛媛 高知 福岡 佐賀 長崎 熊本 大分 宮崎 鹿児島 沖縄), selected: '指定なし', class: 'form-control' %>
       </div>
       
       <div class="form-group border-bottom">
-        <%= f.label :parts_ids, '募集パート' %><br/>
+        <%= f.label :parts_ids, '募集パート' %><span class="text-warning pl-2">(任意)</span><br/>
         <%= f.collection_check_boxes(:part_ids, Part.all, :id, :name) do |part| %>
-        <%= part.label{ part.check_box + part.text }%>
+        <%= part.label{ part.check_box + part.text } %>
         <% end %>
       </div>
       
       <div class="form-group">
-        <%= f.label :introduction, '自己紹介文' %>
+        <%= f.label :introduction, '記事内容(400文字以内)' %><span class="text-danger pl-2">※必須</span>
         <%= f.text_area :introduction, class: 'form-control' %>
       </div>
       
       <%= f.submit '記事を投稿', class: 'btn btn-primary btn-block' %>
     <% end %>
   </div>
-</div>
-
-  
 </div>

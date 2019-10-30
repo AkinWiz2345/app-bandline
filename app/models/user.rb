@@ -5,17 +5,22 @@ class User < ApplicationRecord
                     uniqueness: { case_sensitive: false }
   validates :gender, presence: true
   validates :birthday, presence: true
-  validates :introduction, length: { maximum: 500 } 
+  validates :introduction, presence: true, length: { maximum: 400 }
   
   has_secure_password
   
   mount_uploader :image, ImageUploader
   
+  # お気に入り機能
   has_many :articles, dependent: :destroy
   has_many :favorites, dependent: :destroy
   has_many :likes, through: :favorites, source: :article, dependent: :destroy
+  
+  # 担当パート
   has_many :user_parts, dependent: :destroy
   has_many :parts, through: :user_parts, dependent: :destroy
+  
+  # メッセージ機能
   has_many :entries, dependent: :destroy
   has_many :rooms, through: :entries, dependent: :destroy
   has_many :messages, dependent: :destroy
@@ -40,5 +45,4 @@ class User < ApplicationRecord
   def like?(article)
     self.likes.include?(article)
   end
-  
 end

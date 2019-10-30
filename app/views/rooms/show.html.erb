@@ -1,28 +1,55 @@
-<h1>DM</h1>
-
-<h4>参加者</h4>
 <% @entries.each do |e| %>
-  <% unless e.user.id == current_user.id%>
-    <h5><strong><a href="/users/<%= e.user.id %>"><%= e.user.name%>さん</a></strong></h5>
+  <% unless e.user.id == current_user.id %>
+    <h2 class="text-center my-4"><%= link_to e.user.name, e.user %>さんとのメッセージ</h2>
   <% end %>
 <% end %>
 
-<hr>
-<% if @messages.present? %>
-  <% @messages.each do |m| %>
-    <strong><%= m.content %></strong>
-    <small>by <strong><a href="/users/<%= m.user_id %>"><%= m.user.email %>さん</a></strong></small>
-    <hr>
-  <% end %>
-<% else %>
-  <h3 class="text-center">メッセージはまだありません</h3>
-<% end %>
-
-<%= form_for @message do |f| %>
-  <%= f.text_field :content, :placeholder => "メッセージを入力して下さい" , :size => 70 %>
-  <%= f.hidden_field :room_id, :value => @room.id %>
-  <br>
-  <%= f.submit "投稿する" %>
-<% end %>
-
-<%= link_to "ユーザー一覧に戻る", users_path %>
+<div class="row">
+  <div class="col-sm-8 offset-sm-2">
+    
+    <% if @messages.present? %>
+      <% @messages.each do |m| %>
+        <% if m.user.id == current_user.id %>
+          <div class="media mb-4">
+            <div class="media-body">
+              <p class="bg-light mt-4 mr-2 ml-5 p-3 border rounded-left rounded-bottom"><%= m.content %></p>
+            </div>
+            <% if m.user.image? %>
+              <%= image_tag m.user.image.url, class: "rounded img-fluid mx-auto", width: '100px' %>
+            <% else %>
+              未設定
+            <% end %>
+          </div>
+        <% else %>
+          <div class="media mb-4">
+            <% if m.user.image? %>
+              <%= image_tag m.user.image.url, class: "rounded img-fluid mx-auto", width: '100px' %>
+            <% else %>
+              未設定
+            <% end %>
+            <div class="media-body">
+              <h6 class="ml-2"><%= m.user.name %></h5>
+              <p class="bg-light ml-2 p-3 border rounded-right rounded-bottom"><%= m.content %></p>
+            </div>
+          </div>
+        <% end %>
+    <% end %>
+    <% else %>
+      <h5 class="text-center">メッセージはまだありません</h5>
+    <% end %>
+    
+    <div class="border-top pt-4">
+      <%= form_for @message do |f| %>
+      <%= f.text_field :content, placeholder: 'メッセージを入力して下さい', autofocus: true, size: 90 %>
+      <%= f.hidden_field :room_id, :value => @room.id %>
+      <div class="text-center mt-3">
+        <%= f.submit 'メッセージを送る', class: 'btn btn-success' %>
+      </div>
+      <% end %>
+    </div>
+    
+    <div class="text-center mt-4">
+      <%= link_to "メッセージ一覧に戻る", rooms_path %>
+    </div>
+  </div>
+</div>

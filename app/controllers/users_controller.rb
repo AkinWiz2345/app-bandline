@@ -1,6 +1,6 @@
 class UsersController < ApplicationController
-  before_action :require_user_logged_in
-  before_action :correct_user, only: [:edit, :update, :destroy]
+  before_action :require_user_logged_in, only: :show
+  before_action :correct_user, only: [:edit, :update, :destroy, :likes]
   
   def index
     @users = User.order(id: :desc).page(params[:page]).per(25)
@@ -32,6 +32,7 @@ class UsersController < ApplicationController
     @band_article = @user.articles.find_by(kind: 'band')
     @member_article = @user.articles.find_by(kind: 'member')
     @parts = @user.parts.all.order(:id).map { |h| h[:name] }
+    
     current_user_entries = Entry.where(user_id: current_user.id)
     user_entries = Entry.where(user_id: @user.id)
     unless @user.id == current_user.id
@@ -63,15 +64,15 @@ class UsersController < ApplicationController
   
   private
   
+  def user_params
+    params.require(:user).permit(:name, :email, :password, :password_confirmation, :gender, :birthday, :area, :image, :introduction, part_ids: [])
+  end
+  
   def correct_user
     @user = User.find_by(id: params[:id])
     unless current_user == @user
       flash[:danger] = '権限がありません'
       redirect_back(fallback_location: root_path)
     end
-  end
-  
-  def user_params
-    params.require(:user).permit(:name, :email, :password, :password_confirmation, :gender, :birthday, :area, :image, :introduction, part_ids: [])
   end
 end

@@ -38,5 +38,4 @@ class RoomsController < ApplicationController
   def entry_params
     params.require(:entry).permit(:user_id, :room_id)
   end
-  
 end

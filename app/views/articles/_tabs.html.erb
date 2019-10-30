@@ -1,0 +1,5 @@
+<ul class="nav nav-tabs nav-justified my-5">
+  <li class="nav-item lead"><a href="<%= articles_path %>" class="nav-link <%= 'active font-weight-bold' if current_page?(articles_path) %>">記事一覧</a></li>
+  <li class="nav-item lead"><a href="<%= band_articles_path %>" class="nav-link <%= 'active font-weight-bold' if current_page?(band_articles_path) %>">バンドメンバー募集記事一覧</a></li>
+  <li class="nav-item lead"><a href="<%= member_articles_path %>" class="nav-link <%= 'active font-weight-bold' if current_page?(member_articles_path) %>">メンバー加入希望記事一覧</a></li>
+</ul>

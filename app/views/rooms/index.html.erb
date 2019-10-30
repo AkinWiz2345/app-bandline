@@ -1,8 +1,48 @@
-<% @another_user_entries.each do |e| %>
-  <%= link_to room_path(e.room.id) do %>
-    <%= e.user.name %>とのメッセージ<br/>
-  <% end %>
-  <% unless e.room.message_ids.empty? %>
-    <%= Message.find_by(id: e.room.message_ids.last).content %><br/>
-  <% end %>
-<% end %>
+<h2 class="text-center my-4">メッセージ一覧</h2>
+
+<table class="table">
+  
+  <thead>
+    <tr>
+      <th>相手ユーザアイコン</th>
+      <th>相手ユーザ名</th>
+      <th>最後のメッセージ内容</th>
+      <th>送信者</th>
+      <th>日時</th>
+    </tr>
+  </thead>
+  
+  <tbody>
+    <% @another_user_entries.each do |e| %>
+      <tr>
+        <td>
+          <% if e.user.image? %>
+            <%= image_tag e.user.image.url, class: "rounded img-fluid mx-auto", width: '50px' %>
+          <% else %>
+            未設定
+          <% end %>
+        </td>
+        <td><%= link_to e.user.name, e.user %></td>
+        <td>
+          <% unless e.room.message_ids.empty? %>
+            <%= link_to Message.find_by(id: e.room.message_ids.last).content, room_path(e.room.id), class: 'text-dark' %>
+          <% else %>
+            <%= link_to "メッセージはまだありません", room_path(e.room.id), class: 'text-dark' %>
+          <% end %>
+        </td>
+        <td>
+          <% unless e.room.message_ids.empty? %>
+            <%= Message.find_by(id: e.room.message_ids.last).user.name %>
+          <% end %>
+        </td>
+        <td class="text-muted">
+          <% unless e.room.message_ids.empty? %>
+            <%= Message.find_by(id: e.room.message_ids.last).created_at %>
+          <% end %>
+        </td>
+      </tr>
+    <% end %>
+  </tbody>
+  
+</table>
+

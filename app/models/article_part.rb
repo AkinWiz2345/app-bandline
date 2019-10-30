@@ -1,4 +1,4 @@
 class ArticlePart < ApplicationRecord
-  belongs_to :article
-  belongs_to :part
+  belongs_to :article, optional: true
+  belongs_to :part, optional: true
 end

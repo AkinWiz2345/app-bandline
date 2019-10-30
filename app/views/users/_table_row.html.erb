@@ -1,0 +1,25 @@
+<tr>
+  <td>
+    <% if user.image? %>
+      <%= image_tag user.image.url, class: "rounded img-fluid w-10", width: '70px' %>
+    <% else %>
+      未設定
+    <% end %>
+  </td>
+  <td class="align-middle"><%= link_to user.name, user %></td>
+  <td class="align-middle"><%= user.age %>歳</td>
+  <td class="align-middle">
+    <% if user.area? %>
+      <%= user.area %>
+    <% else %>
+      未設定
+    <% end %>
+    </td>
+  <td class="align-middle">
+    <% if user.parts.present? %>
+      <%= user.parts.all.order(:id).map { |h| h[:name] }.join('、') %>
+    <% else %>
+      未設定
+    <% end %>
+  </td>
+</tr>
