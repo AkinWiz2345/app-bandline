@@ -43,8 +43,9 @@ class ArticlesController < ApplicationController
       redirect_to @article
     else
       @user = current_user
+      @parts_of_member = @article.parts
       flash.now[:danger] = '記事の投稿に失敗しました。'
-      render member_new_articles_path
+      render :edit
     end
   end
   
@@ -72,7 +73,7 @@ class ArticlesController < ApplicationController
       redirect_to @article
     else
       flash[:danger] = '記事は更新されませんでした'
-      render :edit
+      render :show
     end
   end
 
