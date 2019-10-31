@@ -25,7 +25,7 @@ class ArticlesController < ApplicationController
     else
       @user = current_user
       flash.now[:danger] = '記事の投稿に失敗しました。'
-      render band_new_articles_path
+      render :band_new
     end
   end
   
@@ -45,7 +45,7 @@ class ArticlesController < ApplicationController
       @user = current_user
       @parts_of_member = @article.parts
       flash.now[:danger] = '記事の投稿に失敗しました。'
-      render :edit
+      render :member_new
     end
   end
   
