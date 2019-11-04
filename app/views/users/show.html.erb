@@ -16,7 +16,7 @@
         <div class="text-center">
           <%= link_to "編集", edit_user_path(@user), class: 'btn btn-sm btn-success rounded-pill ml-2' %> 
         </div>
-      <% elsif @user.sample == false  %> 
+      <% elsif @user.id != current_user.id %> 
         <% if @room %>　　
           <div class="text-center">
             <%= link_to 'メッセージを送る', @room, class: 'btn btn-success rounded-pill mt-2' %>　
