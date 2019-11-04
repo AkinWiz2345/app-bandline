@@ -24,6 +24,10 @@ class UsersController < ApplicationController
   
   def edit
     @user = User.find_by(id: params[:id])
+    if @user.sample == true
+      flash[:danger] = '編集できません'
+      redirect_back(fallback_location: root_path)
+    end
   end
 
   
@@ -48,7 +52,7 @@ class UsersController < ApplicationController
   
   def update
     @user = User.find_by(id: params[:id])
-    if @user.update(user_params)
+    if @user.update(user_params) && @user.sample == false
       flash[:success] = 'プロフィールは正常に更新されました'
       redirect_to @user
     else

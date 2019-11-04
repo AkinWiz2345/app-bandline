@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2019_10_31_111534) do
+ActiveRecord::Schema.define(version: 2019_11_04_043648) do
 
   create_table "article_parts", options: "ENGINE=InnoDB DEFAULT CHARSET=utf8", force: :cascade do |t|
     t.bigint "article_id"
@@ -96,6 +96,7 @@ ActiveRecord::Schema.define(version: 2019_10_31_111534) do
     t.string "image"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+    t.boolean "sample", default: false, null: false
   end
 
   add_foreign_key "article_parts", "articles"
