@@ -53,7 +53,7 @@
       <% end %>
       
       <dt class="text-left font-weight-normal mt-3">記事内容</dt>
-      <dd class="text-left pl-3 border"><%= @article.introduction %></dd>
+      <dd class="text-left pl-3 border"><%= simple_format(@article.introduction) %></dd>
       
     </dl>
       

@@ -25,7 +25,7 @@ class UsersController < ApplicationController
   def edit
     @user = User.find_by(id: params[:id])
     if @user.sample == true
-      flash[:danger] = '編集できません'
+      flash[:danger] = '編集できません。'
       redirect_back(fallback_location: root_path)
     end
   end

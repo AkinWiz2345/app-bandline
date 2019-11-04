@@ -14,7 +14,7 @@
       <%= link_to '加入希望', member_articles_path, class: "btn btn-secondary btn-sm rounded-pill" %>
     <% end %>
   </td>
-  <td class="align-middle"><%= link_to article.heading, article, class: 'text-dark'%></td>
+  <td class="align-middle"><%= link_to article.heading, article %></td>
   <td class="align-middle"><%= link_to article.user.name, article.user %></td>
   <td class="align-middle text-muted"><%= article.created_at %></td>
   <% if logged_in? && article.user.id == current_user.id %>

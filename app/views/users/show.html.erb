@@ -50,7 +50,7 @@
         <% end %>
       </dd>
       <dt class="text-left font-weight-normal mt-3">自己紹介文</dt>
-      <dd class="text-left pl-3 border"><%= @user.introduction %><%= '未記入です' if @user.introduction == nil %></dd>
+      <dd class="text-left pl-3 border"><%= simple_format(@user.introduction) %><%= '未記入です' if @user.introduction == nil %></dd>
     </dl>
     
   </div>
