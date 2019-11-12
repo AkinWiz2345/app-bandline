@@ -1,6 +1,7 @@
 class Article < ApplicationRecord
   belongs_to :user
   
+  validates :kind, presence: :true
   validates :heading, presence: true, length: { maximum: 50 }
   validates :introduction, presence: true, length: { maximum: 400 }
   validates :gender, presence: true
