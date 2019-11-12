@@ -1,39 +1,26 @@
 require 'rails_helper'
 
 RSpec.describe Article, type: :model do
-  before do
-    @user = User.create(
-     name: 'Tester',
-     email: 'tester@example.com',
-     password_digest: 'dottle-nouveau-pavilion-tights-furze',
-     gender: '男性',
-     birthday: '2000-10-10',
-     introduction: 'hello'
-    )
+  
+  context "when user create a band_article" do
+    before do
+     @band_article = FactoryBot.build(:band_article)
+    end
+    it "has a valid factory of band_article" do
+      expect(@band_article).to be_valid
+    end
   end
   
-  # バンドメンバー募集サイトを作成するとき
-  context "when user create a band_article" do
-    it "is valid with a kind, heading, introduction, and gender" do
-      article = @user.articles.new(
-        kind: 'band',
-        heading: 'Hello',
-        introduction: 'nice to meet you',
-        gender: '指定なし'
-      )
-      expect(article).to be_valid
+  context "when user create a member_article" do
+    before do 
+      @member_article = FactoryBot.build(:member_article)
+    end 
+    it "has a valid factory of band_article" do
+      expect(@member_article).to be_valid
+    end
+    it "equal gender of user" do
+      expect(@member_article.gender).to eq @member_article.user.gender
     end
   end
-  # メンバー加入希望サイトを作成するとき
-  context "when user create a member_article"
-    it "is invalid without an introduction" do
-      article = @user.articles.new(
-        kind: 'member',
-        heading: 'Hello',
-        introduction: nil,
-        gender: '指定なし'
-      )
-      expect(article).to_not be_valid
-    end
   
 end
