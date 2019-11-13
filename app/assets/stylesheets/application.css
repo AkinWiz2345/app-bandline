@@ -13,3 +13,8 @@
  *= require_tree .
  *= require_self
  */
+
+.jumbotron {
+  background: url("concert-3387324_1280.jpg") center 45%;
+}
+
