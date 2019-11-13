@@ -19,14 +19,5 @@ RSpec.describe ArticlesController, type: :controller do
     end
   end
    
-  # describe '#show' do
-  #   before do
-  #     @article = FactoryBot.create(:band_article)
-  #   end
-  #   # 正常にレスポンスを返すこと
-  #   it "responds successfully" do
-  #     get :show, params: {id: @article.id}
-  #     expect(response).to be_success 
-  #   end
-  # end
+  describe '#show' 
 end
