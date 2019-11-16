@@ -67,6 +67,4 @@ gem 'carrierwave', '~> 1.3', '>= 1.3.1'
 
 gem 'cloudinary'
 
-group :production do
- gem 'mysql2', '~> 5.6'
-end
+
