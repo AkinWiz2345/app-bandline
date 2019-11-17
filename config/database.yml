@@ -48,8 +48,12 @@ test:
 #     url: <%= ENV['DATABASE_URL'] %>
 #
 production:
+  <<: *default
   adapter: mysql2
   encoding: utf8
+  database: bandline-mysql
   pool: 5
   username: root
-  password: <%= ENV['BANDLINE_DATABASE_PASSWORD'] %>
+  password: 
+  host: ENV['AWS_ENDPOINT']
+  port: 3306
