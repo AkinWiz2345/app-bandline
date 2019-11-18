@@ -8,8 +8,8 @@ CarrierWave.configure do |config|
     region: ENV['AWS_REGION']
   }
 
-  config.fog_directory  = 'www.cloud9bandline.com'
-  # config.fog_directory  = 'www.awsbandline.com'
+  #config.fog_directory  = 'www.cloud9bandline.com'
+  config.fog_directory  = 'www.awsbandline.com'
   
   # config.asset_host = 'https://www.cloud9bandline.com.s3.amazonaws.com'
   config.cache_storage = :fog

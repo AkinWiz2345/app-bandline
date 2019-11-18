@@ -1,0 +1,15 @@
+current directory: /var/www/projects/app-bandline/vendor/bundle/ruby/2.5.0/gems/bindex-0.8.1/ext/skiptrace
+/home/test_user/.rbenv/versions/2.5.3/bin/ruby -r ./siteconf20191118-4388-ee7s4w.rb extconf.rb
+creating Makefile
+
+current directory: /var/www/projects/app-bandline/vendor/bundle/ruby/2.5.0/gems/bindex-0.8.1/ext/skiptrace
+make "DESTDIR=" clean
+
+current directory: /var/www/projects/app-bandline/vendor/bundle/ruby/2.5.0/gems/bindex-0.8.1/ext/skiptrace
+make "DESTDIR="
+compiling cruby.c
+linking shared-object skiptrace/internal/cruby.so
+
+current directory: /var/www/projects/app-bandline/vendor/bundle/ruby/2.5.0/gems/bindex-0.8.1/ext/skiptrace
+make "DESTDIR=" install
+/usr/bin/install -c -m 0755 cruby.so ./.gem.20191118-4388-5ctia6/skiptrace/internal

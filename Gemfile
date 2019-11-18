@@ -69,4 +69,6 @@ gem 'cloudinary'
 
 gem 'fog-aws'
 
-
+group :production do
+  gem 'unicorn'
+end
