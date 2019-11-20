@@ -6,7 +6,7 @@
 ## バージョンごとの特徴
 * version1(master): 本番環境にHeroku、画像投稿にcarrierwave+cloudinaryを使用。
 * version2: 本番環境にAWSのEC2(AmazonLinux)、RDSにMySQL、画像投稿にcarriewave+S3を使用。
-* version3: 開発環境にDockerを導入。コンテナはアプリケーション側とデータベース側(Posgre)の２種。
+* version3: 開発環境にDocker、Docker Composeを導入。コンテナはアプリケーション側とデータベース側(Posgre)の２種。
 
 ## 主な機能
 * ユーザログイン機能
