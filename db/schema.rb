@@ -12,7 +12,10 @@
 
 ActiveRecord::Schema.define(version: 2019_11_04_043648) do
 
-  create_table "article_parts", options: "ENGINE=InnoDB DEFAULT CHARSET=utf8", force: :cascade do |t|
+  # These are extensions that must be enabled in order to support this database
+  enable_extension "plpgsql"
+
+  create_table "article_parts", force: :cascade do |t|
     t.bigint "article_id"
     t.bigint "part_id"
     t.datetime "created_at", null: false
@@ -21,7 +24,7 @@ ActiveRecord::Schema.define(version: 2019_11_04_043648) do
     t.index ["part_id"], name: "index_article_parts_on_part_id"
   end
 
-  create_table "articles", options: "ENGINE=InnoDB DEFAULT CHARSET=utf8", force: :cascade do |t|
+  create_table "articles", force: :cascade do |t|
     t.bigint "user_id"
     t.string "kind"
     t.text "heading"
@@ -37,7 +40,7 @@ ActiveRecord::Schema.define(version: 2019_11_04_043648) do
     t.index ["user_id"], name: "index_articles_on_user_id"
   end
 
-  create_table "entries", options: "ENGINE=InnoDB DEFAULT CHARSET=utf8", force: :cascade do |t|
+  create_table "entries", force: :cascade do |t|
     t.bigint "user_id"
     t.bigint "room_id"
     t.datetime "created_at", null: false
@@ -46,7 +49,7 @@ ActiveRecord::Schema.define(version: 2019_11_04_043648) do
     t.index ["user_id"], name: "index_entries_on_user_id"
   end
 
-  create_table "favorites", options: "ENGINE=InnoDB DEFAULT CHARSET=utf8", force: :cascade do |t|
+  create_table "favorites", force: :cascade do |t|
     t.bigint "user_id"
     t.bigint "article_id"
     t.datetime "created_at", null: false
@@ -55,7 +58,7 @@ ActiveRecord::Schema.define(version: 2019_11_04_043648) do
     t.index ["user_id"], name: "index_favorites_on_user_id"
   end
 
-  create_table "messages", options: "ENGINE=InnoDB DEFAULT CHARSET=utf8", force: :cascade do |t|
+  create_table "messages", force: :cascade do |t|
     t.bigint "user_id"
     t.bigint "room_id"
     t.text "content"
@@ -65,18 +68,18 @@ ActiveRecord::Schema.define(version: 2019_11_04_043648) do
     t.index ["user_id"], name: "index_messages_on_user_id"
   end
 
-  create_table "parts", options: "ENGINE=InnoDB DEFAULT CHARSET=utf8", force: :cascade do |t|
+  create_table "parts", force: :cascade do |t|
     t.string "name"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
   end
 
-  create_table "rooms", options: "ENGINE=InnoDB DEFAULT CHARSET=utf8", force: :cascade do |t|
+  create_table "rooms", force: :cascade do |t|
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
   end
 
-  create_table "user_parts", options: "ENGINE=InnoDB DEFAULT CHARSET=utf8", force: :cascade do |t|
+  create_table "user_parts", force: :cascade do |t|
     t.bigint "user_id"
     t.bigint "part_id"
     t.datetime "created_at", null: false
@@ -85,7 +88,7 @@ ActiveRecord::Schema.define(version: 2019_11_04_043648) do
     t.index ["user_id"], name: "index_user_parts_on_user_id"
   end
 
-  create_table "users", options: "ENGINE=InnoDB DEFAULT CHARSET=utf8", force: :cascade do |t|
+  create_table "users", force: :cascade do |t|
     t.string "name"
     t.string "email"
     t.string "password_digest"
