@@ -1,7 +1,10 @@
-# README
+# BANDLINE
 
-This README would normally document whatever steps are necessary to get the
-application up and running.
+## 概要
+バンドメンバー募集サイトです。ユーザ登録後、2種の記事の投稿や他ユーザとメッセージのやりとりが可能です。
+
+## 仕様
+Ruby 
 
 Things you may want to cover:
 
