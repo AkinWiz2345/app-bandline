@@ -9,7 +9,7 @@ Rails 5.2.2
 
 ## バージョン
 branchを切ることでバージョンを分けてあります。それぞれの特徴は以下の通りです。
-* master(version1とする): 本番環境にHerokuを使用。テスト環境にRspecを導入(随時追記中)。
+* version1(masterブランチ): 本番環境にHerokuを使用。テスト環境にRspecを導入(随時追記中)。
 * version2: 本番環境をAWS化。EC2のOSはLinux、WebサーバにNginx、APサーバにUnicorn、RDSにMySQLを使用。
 * version3: 開発環境にDocker、Docker Composeを導入。コンテナはAP側と DB側(PosgresSQL)の2つ。
 
@@ -30,3 +30,10 @@ branchを切ることでバージョンを分けてあります。それぞれ�
 * 単体テスト機能(随時追記中)
 * 統合テスト機能(随時追記中)
 
+## 補足
+### version1(masterブランチ)
+画像投稿はcarrierwaveとcloudinaryで実行。機能の追加は基本こちらで実施。
+### version2
+画像投稿はcarrierwaveとS3で実行。アドレスは独自ドメイン取得後に紐付けで実現。
+### version3
+将来的にはWebサーバ、APサーバ、DBサーバの3つのコンテナでの実現を検討。
