@@ -1,8 +1,8 @@
 # BANDLINE
 
 ## 概要
-バンドメンバー募集サイトです。ユーザ登録後、2種の記事の投稿や他ユーザとメッセージのやりとりが可能です。
-Heroku版 https://bandline.herokuapp.com/
+バンドメンバー募集サイトです。ユーザ登録後、2種の記事の投稿や他ユーザとメッセージのやりとりが可能です。  
+Heroku版 https://bandline.herokuapp.com/  
 AWS版　http://bandline-aws.com./
 
 ## 使用言語、フレームワーク
@@ -38,4 +38,4 @@ branchを切ることでバージョンを分けてあります。それぞれ�
 ### version2
 画像投稿はcarrierwaveとS3で実行。アドレスは独自ドメイン取得後に紐付けで実現。
 ### version3
-将来的にはWebサーバ、APサーバ、DBサーバの3つのコンテナでの実現を検討。
+将来的にはWebサーバ、APサーバ、DBサーバの3つのコンテナでの実装を検討。
