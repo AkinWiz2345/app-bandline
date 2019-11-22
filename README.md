@@ -2,6 +2,8 @@
 
 ## 概要
 バンドメンバー募集サイトです。ユーザ登録後、2種の記事の投稿や他ユーザとメッセージのやりとりが可能です。
+Heroku版 https://bandline.herokuapp.com/
+AWS版　http://bandline-aws.com./
 
 ## 使用言語、フレームワーク
 Ruby 2.5.3  
