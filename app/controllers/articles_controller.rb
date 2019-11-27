@@ -1,5 +1,4 @@
 class ArticlesController < ApplicationController
-  before_action :require_user_logged_in, only: [:show]
   before_action :correct_user, only: [:edit, :update, :destroy]
   before_action :check_number_of_band, only: [:band_create, :band_new]
   before_action :check_number_of_member, only: [:member_create, :member_new]

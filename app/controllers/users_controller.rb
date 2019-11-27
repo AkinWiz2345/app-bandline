@@ -1,5 +1,4 @@
 class UsersController < ApplicationController
-  before_action :require_user_logged_in, only: :show
   before_action :correct_user, only: [:edit, :update, :destroy, :likes]
   
   def index
@@ -37,13 +36,15 @@ class UsersController < ApplicationController
     @member_article = @user.articles.find_by(kind: 'member')
     @parts = @user.parts.all.order(:id).map { |h| h[:name] }
     
-    current_user_entries = Entry.where(user_id: current_user.id)
-    user_entries = Entry.where(user_id: @user.id)
-    unless @user.id == current_user.id
-      current_user_entries.each do |cu|
-        user_entries.each do |u|
-          if cu.room_id == u.room_id
-            @room =  Room.find_by(id: cu.room_id)
+    if logged_in?
+      current_user_entries = Entry.where(user_id: current_user.id)
+      user_entries = Entry.where(user_id: @user.id)
+      unless @user.id == current_user.id
+        current_user_entries.each do |cu|
+          user_entries.each do |u|
+            if cu.room_id == u.room_id
+              @room =  Room.find_by(id: cu.room_id)
+            end
           end
         end
       end
