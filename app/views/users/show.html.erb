@@ -6,7 +6,7 @@
     <div class='text-center py-4'>
       <div>
         <% if @user.image? %>
-        <%= image_tag @user.image.url, class: "rounded img-fluid mx-auto", width: '200px' %>
+          <%= image_tag @user.image.url, class: "rounded img-fluid mx-auto", width: '200px' %>
         <% end %>
       </div>
   
@@ -67,7 +67,7 @@
       </tbody>
     </table>
     
-  <% elsif @user.id == current_user.id %>
+  <% elsif logged_in? && @user.id == current_user.id %>
     <div class="text-center mt-4">
       <%= link_to 'バンドメンバー募集記事を新規作成する', band_new_articles_path, class: 'btn btn-outline-dark' %>
     </div>
@@ -92,7 +92,7 @@
         </tbody>
       </table>
     </div>
-  <% elsif @user.id ==  current_user.id %>
+  <% elsif logged_in? && @user.id ==  current_user.id %>
     <div class="text-center mt-4">
       <%= link_to 'メンバー加入希望記事を新規作成する', member_new_articles_path, class: 'btn btn-outline-secondary' %>
     </div>
@@ -105,5 +105,3 @@
     </table>
   <% end %>
 </div>
-      
-
